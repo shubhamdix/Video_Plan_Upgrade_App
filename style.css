@@ -1,0 +1,118 @@
+body {
+    
+    height: 98vh;
+    width: 205vh;
+    background: linear-gradient(#f9f9fa, #243b55);
+    border-radius: 5px;
+}
+
+
+.h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+h1 {
+    text-align: center;
+    width: 800px;
+    background-color: rgb(45, 46, 46);
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 36px;
+    text-shadow: 5px 5px 5px black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+p {
+    text-align: center;
+    background-color: rgb(45, 46, 46);
+    color: white;
+    padding: 5px 15px;
+    font-weight: bold;
+    font-size: 24px;
+    text-shadow: 5px 5px 5px black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+
+.flex-container {
+    /*background-color: #5a6a7a;*/
+}
+
+.flex-container1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90px;
+    background-color: #7f94a8;
+    border-radius: 10px;
+}
+
+
+
+.bronze-button {
+    background-color: #cd7f32;
+    /* Bronze color */
+}
+
+.silver-button {
+    background-color: #c0c0c0;
+    /* Silver color */
+}
+
+.gold-button {
+    background-color: #ffd700;
+    /* Gold color */
+}
+
+button {
+    /*border: none;*/
+    /*font-size: 16px;*/
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: white;
+    margin: 30px;
+    padding: 10px 20px;
+    border: solid 2px black;
+    border-radius: 10px;
+    font-size: larger;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: 2px 2px 2px black;
+}
+
+button:hover {
+    /*filter: brightness(1.1);*/
+    box-shadow: 0 10px 30px 15px black;
+    /*box-shadow: 5px 5px 5px black;*/
+    text-shadow: 2px 2px 2px black;
+    border: solid 3px white;
+}
+
+video {
+    display: block;
+    margin: 20px auto;
+}
+
+.restricted {
+    filter: grayscale(100%);
+    pointer-events: none;
+}

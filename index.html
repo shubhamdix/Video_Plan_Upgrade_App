@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Plan Upgrade Platform</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
+</head>
+
+<body>
+    
+    <div class='h1'><h1>Welcome to the Video Streaming Platform</h1></div>
+    
+    <p class='p' id="plan">Current Plan: Free (5 mins limit)</p>
+    
+
+    <div class='container'>
+        <div class="flex-container">
+    <video id="video" width="520" height="250" controls>
+        <source src="/Kung_Fu_Panda_2_2011_Hindi_Dubbed_Movie_480p_(FilmyZilla.in).mp4.mkv" type="video/mp4">
+        Your browser does not support HTML video.
+    </video>
+    </div>
+
+    <div class='flex-container1'>
+    <div>
+        <button class="bronze-button" onclick="startPayment('Bronze', 10, 7)">Upgrade to Bronze - ₹10 (7 mins)</button>
+        <button class="silver-button" onclick="startPayment('Silver', 50, 10)">Upgrade to Silver - ₹50 (10 mins)</button>
+        <button class="gold-button" onclick="startPayment('Gold', 100, Infinity)">Upgrade to Gold - ₹100 (Unlimited)</button>
+    </div>
+    </div>
+    </div>
+
+
+    <script>
+        let currentPlan = 'Free';
+        let videoLimit = 5; // Minutes
+        const video = document.getElementById('video');
+
+        video.addEventListener('timeupdate', function () {
+            if (video.currentTime / 60 >= videoLimit) {
+                video.pause();
+                video.controls = false; // Disable controls
+                video.classList.add("restricted"); // Add visual restriction effect
+                alert(`You have reached your ${videoLimit} minute limit. Upgrade your plan to continue.`);
+            }
+        });
+
+        function startPayment(plan, cost, limit) {
+            const options = {
+                key: "rzp_test_cUw35q7UkcTY0D", // Replace with your Razorpay Key ID
+                amount: cost * 100, // Amount in paise
+                currency: "INR",
+                name: "Video Streaming",
+                description: `Upgrade to ${plan} Plan`,
+                handler: function (response) {
+                    alert("Payment Successful! Transaction ID: " + response.razorpay_payment_id);
+                    upgradePlan(plan, cost, limit);
+                },
+                theme: { color: "#3399cc" }
+            };
+            const rzp = new Razorpay(options);
+            rzp.open();
+        }
+
+        function upgradePlan(plan, cost, limit) {
+            alert(`Payment successful! You are now on the ${plan} Plan.`);
+
+            const currentTime = video.currentTime; // Save playback position
+
+            currentPlan = plan;
+            videoLimit = limit;
+            document.getElementById('plan').innerText = `Current Plan: ${plan} (${limit === Infinity ? 'Unlimited' : limit + ' mins'} limit)`;
+
+            video.controls = true; // Re-enable controls
+            video.classList.remove("restricted"); // Remove restriction effect
+            video.currentTime = currentTime; // Restore playback position
+            video.play(); // Resume playing
+
+            triggerEmail(plan, cost);
+        }
+
+        function triggerEmail(plan, cost) {
+            alert(`Email sent: Thank you for upgrading to the ${plan} Plan. An invoice of ₹${cost} has been emailed to you.`);
+        }
+    </script>
+</body>
+
+</html>
